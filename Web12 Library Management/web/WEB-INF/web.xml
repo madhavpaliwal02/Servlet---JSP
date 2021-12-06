@@ -1,30 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-   
-    <servlet> // Admin
+    <!--Admin-->
+    <servlet>
         <servlet-name>admin</servlet-name>
         <servlet-class>com.admin.admin</servlet-class>
     </servlet>
-<!--    <servlet> // Admin Login
-        <servlet-name>adminLogin</servlet-name>
-        <servlet-class>com.admin.adminLoginView</servlet-class>
-    </servlet>-->
-    <servlet> // Add Librarian
-        <servlet-name>addLibrarian</servlet-name>
-        <servlet-class>com.admin.addLibrarian</servlet-class>
+    <servlet>
+        <servlet-name>RemoveLibrarian</servlet-name>
+        <servlet-class>com.admin.RemoveLibrarian</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>librarian</servlet-name>
+        <servlet-class>com.librarian.librarian</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LibrarianLoginView</servlet-name>
+        <servlet-class>com.librarian.LibrarianLoginView</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addBooks</servlet-name>
+        <servlet-class>com.librarian.addBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewBooks</servlet-name>
+        <servlet-class>com.librarian.viewBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>removeBooks</servlet-name>
+        <servlet-class>com.librarian.removeBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewIssueBooks</servlet-name>
+        <servlet-class>com.librarian.viewIssueBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addStudent</servlet-name>
+        <servlet-class>com.librarian.addStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewStudent</servlet-name>
+        <servlet-class>com.librarian.viewStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>removeStudent</servlet-name>
+        <servlet-class>com.librarian.removeStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>student</servlet-name>
+        <servlet-class>com.student.student</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>studentLoginView</servlet-name>
+        <servlet-class>com.student.studentLoginView</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>issueBook</servlet-name>
+        <servlet-class>com.student.issueBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>issuedBook</servlet-name>
+        <servlet-class>com.student.issuedBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>returnBook</servlet-name>
+        <servlet-class>com.student.returnBook</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
-<!--    <servlet-mapping>
+    <!--Admin Login View-->
+    <servlet>
         <servlet-name>adminLogin</servlet-name>
-        <url-pattern>/adminLogin</url-pattern>
-    </servlet-mapping>-->
+        <servlet-class>com.admin.adminLoginView</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminLogin</servlet-name>
+        <url-pattern>/adminLoginView</url-pattern>
+    </servlet-mapping>
+    <!--Add Librarian-->
+    <servlet>
+        <servlet-name>addLibrarian</servlet-name>
+        <servlet-class>com.admin.addLibrarian</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addLibrarian</servlet-name>
         <url-pattern>/addLibrarian</url-pattern>
+    </servlet-mapping>
+    <!--View Librarian-->
+    <servlet>
+        <servlet-name>ViewLibrarian</servlet-name>
+        <servlet-class>com.admin.ViewLibrarian</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewLibrarian</servlet-name>
+        <url-pattern>/viewLibrarian</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveLibrarian</servlet-name>
+        <url-pattern>/removeLibrarian</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>librarian</servlet-name>
+        <url-pattern>/librarian</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LibrarianLoginView</servlet-name>
+        <url-pattern>/librarianLoginView</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addBooks</servlet-name>
+        <url-pattern>/addBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewBooks</servlet-name>
+        <url-pattern>/viewBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removeBooks</servlet-name>
+        <url-pattern>/removeBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewIssueBooks</servlet-name>
+        <url-pattern>/issueBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addStudent</servlet-name>
+        <url-pattern>/addStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewStudent</servlet-name>
+        <url-pattern>/viewStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removeStudent</servlet-name>
+        <url-pattern>/removeStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>student</servlet-name>
+        <url-pattern>/student</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>studentLoginView</servlet-name>
+        <url-pattern>/studentLoginView</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>issueBook</servlet-name>
+        <url-pattern>/issueBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>issuedBook</servlet-name>
+        <url-pattern>/issuedBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>returnBook</servlet-name>
+        <url-pattern>/returnBook</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

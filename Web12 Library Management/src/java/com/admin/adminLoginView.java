@@ -41,16 +41,24 @@ public class adminLoginView extends HttpServlet {
             out.println("<body>");
             
             // Add Librarian
-            out.println("<form action='addLibrarian'>"
+            out.println("<br>"
+                    + "<form action='addLibrarian'>"
                     + "<input type='submit' value='Add Librarian'/>"
                    + "</form>");
             
-            out.println("<form action=''>"
-                    + ""
+            out.println("<br>"
+                    + "<form action='viewLibrarian'>"
+                    + "<input type='submit' value='View Librarians'/>"
                    + "</form>");
             
-            out.println("<form action=''>"
-                    + ""
+            out.println("<br>"
+                    + "<form action='removeLibrarian'>"
+                    + "<input type='submit' value='Remove Librarian'/>"
+                   + "</form>");
+            
+            out.println("<br>"
+                    + "<form action='login.html'>"
+                    + "<input type='submit' value='Log-out'/>"
                    + "</form>");
             
             out.println("</body>");

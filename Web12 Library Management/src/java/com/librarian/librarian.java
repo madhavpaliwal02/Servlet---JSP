@@ -1,11 +1,10 @@
-package com.admin;
+package com.librarian;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class admin extends HttpServlet {
+public class librarian extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -24,21 +23,23 @@ public class admin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet admin</title>");            
+            out.println("<title>Servlet librarian</title>");            
             out.println("</head>");
             out.println("<body>");
             
-            String name = request.getParameter("adname");
-            String pass = request.getParameter("adpass");
+            String uname = request.getParameter("libuname");
+            String pass = request.getParameter("libpass");
             
-            if (pass.equals("admin@123")) {
-                RequestDispatcher rd = request.getRequestDispatcher("adminLoginView");
+            // Database query fetching details
+            
+            if(true){
+                RequestDispatcher rd = request.getRequestDispatcher("librarianLoginView");
                 rd.forward(request, response);
             }
             else{
                 out.println("You have entered wrong details !!!");
                 
-                RequestDispatcher rd = request.getRequestDispatcher("admin.html");
+                RequestDispatcher rd = request.getRequestDispatcher("librarian.html");
                 rd.include(request, response);
             }
             

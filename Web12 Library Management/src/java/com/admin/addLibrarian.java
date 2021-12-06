@@ -1,20 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.admin;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
-/**
- *
- * @author Nayan
- */
 public class addLibrarian extends HttpServlet {
 
     /**
@@ -37,7 +27,33 @@ public class addLibrarian extends HttpServlet {
             out.println("<title>Servlet addLibrarian</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("This is add librarian page");
+            
+            //out.println("<h1>Libraian Registration Page</h1>");
+            RequestDispatcher rd = request.getRequestDispatcher("addLibrarianForm.html");
+            rd.include(request, response);
+            
+            out.println("<br>");
+            out.println("<br>");
+            RequestDispatcher rd1 = request.getRequestDispatcher("adminLoginView");
+            rd1.include(request, response);
+            
+            String name = request.getParameter("libuname");
+            String pass = request.getParameter("libpass");
+            HashMap<String, String> map = new HashMap<>();
+            
+//            while(map!=null){
+//                String key = String.valueOf(map.keySet());
+//                if(key.)
+//            }
+            
+          
+            map.put(name, pass);
+            out.println("Librarian: " + map);
+//            rd.include(request, response);
+            
+            
+            
+            
             out.println("</body>");
             out.println("</html>");
         }

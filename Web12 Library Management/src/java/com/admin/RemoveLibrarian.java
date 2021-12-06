@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package com.admin;
 
 import java.io.IOException;
@@ -5,7 +9,11 @@ import java.io.PrintWriter;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class admin extends HttpServlet {
+/**
+ *
+ * @author Nayan
+ */
+public class RemoveLibrarian extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -24,23 +32,24 @@ public class admin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet admin</title>");            
+            out.println("<title>Servlet RemoveLibrarian</title>");            
             out.println("</head>");
             out.println("<body>");
             
-            String name = request.getParameter("adname");
-            String pass = request.getParameter("adpass");
+            RequestDispatcher rd = request.getRequestDispatcher("removeLibrarianForm.html");
+            rd.include(request, response);
             
-            if (pass.equals("admin@123")) {
-                RequestDispatcher rd = request.getRequestDispatcher("adminLoginView");
-                rd.forward(request, response);
-            }
-            else{
-                out.println("You have entered wrong details !!!");
-                
-                RequestDispatcher rd = request.getRequestDispatcher("admin.html");
-                rd.include(request, response);
-            }
+            String name = request.getParameter("libname");
+            String uname = request.getParameter("libuname");
+            
+            // Chechking in the database if exist deleted, else retry
+            
+            out.println("");
+            out.println("<br>");
+            out.println("<br>");
+            RequestDispatcher rd1 = request.getRequestDispatcher("adminLoginView");
+            rd1.include(request, response);
+            
             
             out.println("</body>");
             out.println("</html>");

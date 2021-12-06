@@ -1,15 +1,20 @@
 <html>
     <head>
-        <title>Librarian Login Page</title>
+        <title>Librarian Registration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Librarian Login Form</h1>
+        <h1>Librarian Registration Page</h1>
         
-        <form action="librarian" method="post">
+        <form action='addLibrarian'>
             <table>
-                <tr>
+                <tr> 
+                    <td>Enter Name: </td>
+                    <td><input type='text' name='libname'></td>
+                </tr>
+                
+                <tr> 
                     <td>Enter Username: </td>
                     <td><input type='text' name='libuname'></td>
                 </tr>
@@ -25,6 +30,7 @@
                 </tr>
             </table>            
         </form>
+                    
         
     </body>
 </html>

@@ -1,11 +1,22 @@
-package com.admin;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package com.librarian;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-public class admin extends HttpServlet {
+/**
+ *
+ * @author Nayan
+ */
+public class removeBooks extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -24,23 +35,19 @@ public class admin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet admin</title>");            
+            out.println("<title>Servlet removeBooks</title>");            
             out.println("</head>");
             out.println("<body>");
             
-            String name = request.getParameter("adname");
-            String pass = request.getParameter("adpass");
+            RequestDispatcher rd = request.getRequestDispatcher("removeBookForm.html");
+            rd.include(request, response);
             
-            if (pass.equals("admin@123")) {
-                RequestDispatcher rd = request.getRequestDispatcher("adminLoginView");
-                rd.forward(request, response);
-            }
-            else{
-                out.println("You have entered wrong details !!!");
-                
-                RequestDispatcher rd = request.getRequestDispatcher("admin.html");
-                rd.include(request, response);
-            }
+            String name = request.getParameter("bname");
+            int edition = Integer.parseInt(request.getParameter("bedition"));
+            
+            // Database me se remove krenge
+            
+            out.println("");
             
             out.println("</body>");
             out.println("</html>");

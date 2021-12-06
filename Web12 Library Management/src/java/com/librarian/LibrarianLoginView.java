@@ -1,11 +1,11 @@
-package com.admin;
+package com.librarian;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class admin extends HttpServlet {
+public class LibrarianLoginView extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -24,23 +24,56 @@ public class admin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet admin</title>");            
+            out.println("<title>Servlet LibrarianLoginView</title>");            
             out.println("</head>");
             out.println("<body>");
+            out.println("");
             
-            String name = request.getParameter("adname");
-            String pass = request.getParameter("adpass");
+            out.println("<table> <td>");
             
-            if (pass.equals("admin@123")) {
-                RequestDispatcher rd = request.getRequestDispatcher("adminLoginView");
-                rd.forward(request, response);
-            }
-            else{
-                out.println("You have entered wrong details !!!");
-                
-                RequestDispatcher rd = request.getRequestDispatcher("admin.html");
-                rd.include(request, response);
-            }
+            out.println("<br>"
+                    + "<form action='addBookForm.html'>"
+                    + "<input type='submit' value='Add Books'>"
+                    + "</form>");
+            
+            out.println("<br>"
+                    + "<form action='viewBooks'>"
+                    + "<input type='submit' value='View Books'>"
+                    + "</form>");
+            
+            out.println("<br>"
+                    + "<form action='removeBooks'>"
+                    + "<input type='submit' value='Remove Books'>"
+                    + "</form>");
+            
+            out.println("<br>"
+                    + "<form action='issueBooks'>"
+                    + "<input type='submit' value='View Issued Books'>"
+                    + "</form>");
+            
+            out.println("</td> <td>");
+            
+            out.println("<br>"
+                    + "<form action='addStudentForm.html'>"
+                    + "<input type='submit' value='Add Students'>"
+                    + "</form>");
+            
+            out.println("<br>"
+                    + "<form action='viewStudent'>"
+                    + "<input type='submit' value='View Students'>"
+                    + "</form>");
+            
+            out.println("<br>"
+                    + "<form action='removeStudent'>"
+                    + "<input type='submit' value='Remove Students'>"
+                    + "</form>");
+            
+            out.println("<br>"
+                    + "<form action='login.html'>"
+                    + "<input type='submit' value='Log-out'>"
+                    + "</form>");
+            
+            out.println("</td> </table>");
             
             out.println("</body>");
             out.println("</html>");

@@ -1,10 +1,30 @@
 <html>
     <head>
-        <title>Librarian Page</title>
+        <title>Librarian Login Page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Librarian</div>
+        <h1>Librarian Login Form</h1>
+        
+        <form action="librarian" method="post">
+            <table>
+                <tr>
+                    <td>Enter Username: </td>
+                    <td><input type='text' name='libuname'></td>
+                </tr>
+                
+                <tr> 
+                    <td>Enter Password: </td>
+                    <td><input type='password' name='libpass'></td>
+                </tr>
+                
+                <tr>
+                    <td><input type="submit" value="Register"/></td>
+                    <td><input type="reset" value="Reset"/></td>
+                </tr>
+            </table>            
+        </form>
+        
     </body>
 </html>
