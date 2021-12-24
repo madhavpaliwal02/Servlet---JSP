@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.admin;
 
+import com.sql.SqlQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.*;
@@ -43,6 +40,14 @@ public class RemoveLibrarian extends HttpServlet {
             String uname = request.getParameter("libuname");
             
             // Chechking in the database if exist deleted, else retry
+            int status = SqlQuery.deleteLib(name, uname);
+            
+            if(status>0){
+                out.println("Succesfully deleted...");
+            }
+            else{
+                out.println("Record doesn't exist...");
+            }
             
             out.println("");
             out.println("<br>");

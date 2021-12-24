@@ -1,7 +1,8 @@
 package com.admin;
 
+import com.sql.Librarian;
+import com.sql.SqlQuery;
 import java.io.*;
-import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -24,36 +25,43 @@ public class addLibrarian extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addLibrarian</title>");            
+            out.println("<title>Servlet addLibrarian</title>");
             out.println("</head>");
             out.println("<body>");
-            
-            //out.println("<h1>Libraian Registration Page</h1>");
-            RequestDispatcher rd = request.getRequestDispatcher("addLibrarianForm.html");
-            rd.include(request, response);
-            
-            out.println("<br>");
-            out.println("<br>");
-            RequestDispatcher rd1 = request.getRequestDispatcher("adminLoginView");
-            rd1.include(request, response);
-            
-            String name = request.getParameter("libuname");
+
+            String name = request.getParameter("libname");
+            String uname = request.getParameter("libuname");
             String pass = request.getParameter("libpass");
-            HashMap<String, String> map = new HashMap<>();
-            
-//            while(map!=null){
-//                String key = String.valueOf(map.keySet());
-//                if(key.)
-//            }
-            
-          
-            map.put(name, pass);
-            out.println("Librarian: " + map);
-//            rd.include(request, response);
-            
-            
-            
-            
+
+            if (!(name.equals("") || pass.equals("") || uname.equals(""))
+                    && !(name == null || uname == null || pass == null)) {
+                
+//                out.println(name +" "+ uname +" "+ pass);
+
+                Librarian lib = new Librarian();
+                lib.setName(name);
+                lib.setUname(uname);
+                lib.setPass(pass);
+
+                // insert query
+                int status = SqlQuery.insertLib(lib);
+//                int status = SqlQuery.insert(name, uname, pass);
+
+                if (status > 0) {
+                    out.println("<h1>Successfully Submitted...</h1>");
+                    RequestDispatcher rd1 = request.getRequestDispatcher("adminLoginView");
+                    rd1.include(request, response);
+                } else {
+                    out.println("<h3>Sorry ! unable to save...</h3>");
+                }
+
+            } else {
+                out.println("Invalid Input! Please try again");
+
+                RequestDispatcher rd2 = request.getRequestDispatcher("addLibrarianForm.html");
+                rd2.include(request, response);
+            }
+
             out.println("</body>");
             out.println("</html>");
         }

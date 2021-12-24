@@ -3,6 +3,8 @@ package com.librarian;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import com.sql.SqlQuery;
+import java.util.regex.Pattern;
 
 public class librarian extends HttpServlet {
 
@@ -23,26 +25,52 @@ public class librarian extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet librarian</title>");            
+            out.println("<title>Servlet librarian</title>");
             out.println("</head>");
             out.println("<body>");
+
             
+            // Getting responses from html form
             String uname = request.getParameter("libuname");
             String pass = request.getParameter("libpass");
+            out.println(uname);
+            out.println(pass);
+
             
-            // Database query fetching details
+            // Checking whether the password is correct or not
+//            Pattern p;
+//            boolean bool = false;
             
-            if(true){
-                RequestDispatcher rd = request.getRequestDispatcher("librarianLoginView");
-                rd.forward(request, response);
-            }
-            else{
-                out.println("You have entered wrong details !!!");
+            
+            if (!(uname.equals("") && uname == null) && !(pass.equals("") && pass == null)) {
+                // Database query fetching details
+                // Password matcher (regex)
                 
+//                String cpass = SqlQuery.matchLib(uname);
+////                bool = p.matches(pass, cpass);
+//                out.println(cpass);
+
+//                if (cpass.equals(pass)) {
+                    RequestDispatcher rd = request.getRequestDispatcher("librarianLoginView");
+                    rd.forward(request, response);
+                /*} 
+                else {
+                    out.println("Librarian Doesn't Exist !!!");
+
+                    RequestDispatcher rd = request.getRequestDispatcher("librarian.html");
+                    rd.include(request, response);
+                    
+                    out.print("<br><br>");
+                    
+                    RequestDispatcher rd1 = request.getRequestDispatcher("addLibrarianForm.html");
+                    rd1.include(request, response);
+                }*/
+            } else {
+                out.println("<h2>Invalid Input ! Please Try Again</h2>");
                 RequestDispatcher rd = request.getRequestDispatcher("librarian.html");
                 rd.include(request, response);
             }
-            
+
             out.println("</body>");
             out.println("</html>");
         }

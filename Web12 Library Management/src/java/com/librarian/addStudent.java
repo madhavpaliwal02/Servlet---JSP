@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.librarian;
 
 import java.io.IOException;
@@ -10,11 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.sql.*;
+import javax.servlet.RequestDispatcher;
 
-/**
- *
- * @author Nayan
- */
 public class addStudent extends HttpServlet {
 
     /**
@@ -38,15 +32,34 @@ public class addStudent extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
+            // Fetching values from form
             String name = request.getParameter("sname");
             String email = request.getParameter("semail");
             String pass = request.getParameter("spass");
             String rollno = request.getParameter("srollno");
             String course = request.getParameter("scourse");
             
-            // Database 
+            // Creating student object and passing it as argument
+            Student stu = new Student();
+            stu.setName(name);
+            stu.setEmail(email);
+            stu.setPass(pass);
+            stu.setRollno(rollno);
+            stu.setCourse(course);
             
-            out.println("Ragistered Successfully !!!");
+            // Database 
+            int status = SqlQuery.insertStu(stu);
+            
+            if (status > 0) {
+                out.println("<h1>Registered Successfully !!!</h1>");
+                RequestDispatcher rd = request.getRequestDispatcher("librarianLoginView");
+                rd.include(request, response);
+            } else {
+                out.println("<h3>Sorry ! unable to save...</h3>");
+                RequestDispatcher rd = request.getRequestDispatcher("addStudentForm.html");
+                rd.include(request, response);
+            }
+            
             
             out.println("</body>");
             out.println("</html>");

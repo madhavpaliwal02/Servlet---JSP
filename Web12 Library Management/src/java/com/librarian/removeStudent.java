@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.librarian;
 
 import java.io.IOException;
@@ -11,11 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-/**
- *
- * @author Nayan
- */
+import com.sql.*;
+        
 public class removeStudent extends HttpServlet {
 
     /**
@@ -47,8 +40,20 @@ public class removeStudent extends HttpServlet {
             
             // Database me se delete krna hai
             
-//            out.println("Name: "+ name);
-//            out.println("<br>Roll No: "+ rollNo);
+            int status = SqlQuery.deleteStu(name, rollNo);
+            
+            if(status>0){
+                out.println("Succesfully deleted...");
+            }
+            else{
+                out.println("Record doesn't exist...");
+            }
+                        
+            out.println("<br>");
+            out.println("<br>");
+                        
+            RequestDispatcher rd1 = request.getRequestDispatcher("librarianLoginView");
+            rd1.include(request, response);
                         
             out.println("</body>");
             out.println("</html>");

@@ -7,6 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import com.sql.Librarian;
+import com.sql.SqlQuery;
 
 public class ViewLibrarian extends HttpServlet {
 
@@ -31,7 +34,28 @@ public class ViewLibrarian extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            out.println("This is View Librarain page");
+            out.println("<h1>This is View Librarain page</h1>");
+            
+            // Creating a list of librarian to fetch multiple records
+            ArrayList<Librarian> al = SqlQuery.selectAllLib();
+            
+            out.println("<table border='1' width='100%'>");
+
+            out.print("<tr>"
+                    + "<th>Name</th>"
+                    + "<th>Username</th>"
+                    + "<th>Password</th>"
+                    + "</tr>");
+            
+            for(Librarian lib : al){
+                out.print("<tr>"
+                        + "<td>"+ lib.getName() +"</td>"
+                        + "<td>"+ lib.getUname() +"</td>"
+                        + "<td>"+ lib.getPass() +"</td>"
+                        + "</tr>");
+            }
+            
+            out.println("</table>");
             
             out.println("<br>");
             out.println("<br>");

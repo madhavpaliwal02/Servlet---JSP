@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.librarian;
 
 import java.io.IOException;
@@ -10,11 +6,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.sql.*;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 
-/**
- *
- * @author Nayan
- */
 public class viewBooks extends HttpServlet {
 
     /**
@@ -39,7 +34,35 @@ public class viewBooks extends HttpServlet {
             out.println("<body>");
             
             out.println("This is view Books Page");
+            
+            ArrayList<Book> book = SqlQuery.selectAllBook();
+            
+            out.println("<table border='1' width='100%'>");
+
+            out.print("<tr>"
+                    + "<th>Name</th>"
+                    + "<th>Description</th>"
+                    + "<th>Author Name</th>"
+                    + "<th>Edition</th>"
+                    + "</tr>");
+            
+            for(Book b : book){
+                out.print("<tr>"
+                        + "<td>"+ b.getName() +"</td>"
+                        + "<td>"+ b.getDesc() +"</td>"
+                        + "<td>"+ b.getAuth() +"</td>"
+                        + "<td>"+ b.getEdition() +"</td>"
+                        + "</tr>");
+            }
+            
+            out.println("</table>");
+            
+            out.println("<br>");
+            out.println("<br>");
                         
+            RequestDispatcher rd = request.getRequestDispatcher("librarianLoginView");
+            rd.include(request, response);
+            
             out.println("</body>");
             out.println("</html>");
         }

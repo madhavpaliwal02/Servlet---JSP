@@ -31,7 +31,7 @@ public class admin extends HttpServlet {
             String name = request.getParameter("adname");
             String pass = request.getParameter("adpass");
             
-            if (pass.equals("admin@123")) {
+            if (pass.equals("admin@123") && name.equalsIgnoreCase("admin")) {
                 RequestDispatcher rd = request.getRequestDispatcher("adminLoginView");
                 rd.forward(request, response);
             }

@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.librarian;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.ArrayList;
+import com.sql.*;
 
-/**
- *
- * @author Nayan
- */
 public class viewStudent extends HttpServlet {
 
     /**
@@ -39,6 +30,33 @@ public class viewStudent extends HttpServlet {
             out.println("<body>");
             
             out.println("This is View Student Page");
+            ArrayList<Student> stu = SqlQuery.selectAllStu();
+            
+            out.println("<table border='1' width='100%'>");
+
+            out.print("<tr>"
+                    + "<th>Name</th>"
+                    + "<th>Roll NO</th>"
+                    + "<th>Email</th>"
+                    + "<th>Password</th>"
+                    + "<th>Course</th>"
+                    + "</tr>");
+            
+            for(Student s : stu){
+                out.print("<tr>"
+                        + "<td>"+ s.getName() +"</td>"
+                        + "<td>"+ s.getRollno() +"</td>"
+                        + "<td>"+ s.getEmail() +"</td>"
+                        + "<td>"+ s.getPass() +"</td>"
+                        + "<td>"+ s.getCourse() +"</td>"
+                        + "</tr>");
+            }
+            
+            out.println("</table>");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("librarianLoginView");
+            rd.include(request, response);
+            
             
             out.println("</body>");
             out.println("</html>");

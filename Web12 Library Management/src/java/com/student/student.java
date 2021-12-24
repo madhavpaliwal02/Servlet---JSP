@@ -1,5 +1,6 @@
 package com.student;
 
+import com.sql.*;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -30,7 +31,15 @@ public class student extends HttpServlet {
             String rollNo = request.getParameter("rollNo");
             String pass = request.getParameter("pass");
             
+            out.println(rollNo);
+            out.println(pass);
+            out.println("<br><br>");
+            
             // checking from the database
+            
+//            String cpass = SqlQuery.matchStu(rollNo);
+//            Student s = SqlQuery.matchStu(rollNo);
+//            out.println(s.getPass());
             
             if(true){
                 RequestDispatcher rd = request.getRequestDispatcher("studentLoginView");

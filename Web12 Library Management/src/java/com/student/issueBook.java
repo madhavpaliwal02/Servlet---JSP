@@ -3,6 +3,9 @@ package com.student;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import com.librarian.*;
+import com.sql.*;
+import java.util.ArrayList;
 
 public class issueBook extends HttpServlet {
 
@@ -27,7 +30,31 @@ public class issueBook extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            out.println("<br"
+             ArrayList<Book> book = SqlQuery.selectAllBook();
+            
+            out.print("<h1>Available Books</h1>");
+            out.println("<table border='1' width='100%'>");
+
+            out.print("<tr>"
+                    + "<th>Name</th>"
+                    + "<th>Description</th>"
+                    + "<th>Author Name</th>"
+                    + "<th>Edition</th>"
+                    + "</tr>");
+            
+            for(Book b : book){
+                out.print("<tr>"
+                        + "<td>"+ b.getName() +"</td>"
+                        + "<td>"+ b.getDesc() +"</td>"
+                        + "<td>"+ b.getAuth() +"</td>"
+                        + "<td>"+ b.getEdition() +"</td>"
+                        + "</tr>");
+            }
+            
+            out.println("</table>");
+            
+            
+            out.println("<br><br><br><br>"
                     + "<form action='issuedBook' >"
                     + "Enter Book Name: <input type='text' name='bname'/><br>"
                     + "Enter Book Edition: <input type='text' name='bedition'/><br>"

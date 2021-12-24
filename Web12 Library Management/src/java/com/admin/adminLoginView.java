@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.admin;
 
 import java.io.IOException;
@@ -12,10 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Nayan
- */
 @WebServlet(name = "adminLoginView", urlPatterns = {"/adminLogin"})
 public class adminLoginView extends HttpServlet {
 
@@ -42,20 +34,23 @@ public class adminLoginView extends HttpServlet {
             
             // Add Librarian
             out.println("<br>"
-                    + "<form action='addLibrarian'>"
+                    + "<form action='addLibrarianForm.html'>"
                     + "<input type='submit' value='Add Librarian'/>"
                    + "</form>");
             
+            // View Librarian
             out.println("<br>"
                     + "<form action='viewLibrarian'>"
                     + "<input type='submit' value='View Librarians'/>"
                    + "</form>");
             
+            // Remove Librarian
             out.println("<br>"
                     + "<form action='removeLibrarian'>"
                     + "<input type='submit' value='Remove Librarian'/>"
                    + "</form>");
-            
+             
+            // Logout
             out.println("<br>"
                     + "<form action='login.html'>"
                     + "<input type='submit' value='Log-out'/>"

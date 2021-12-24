@@ -4,6 +4,7 @@
  */
 package com.librarian;
 
+import com.sql.SqlQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -47,7 +48,20 @@ public class removeBooks extends HttpServlet {
             
             // Database me se remove krenge
             
-            out.println("");
+            int status = SqlQuery.deleteBook(name, edition);
+            
+            if(status>0){
+                out.println("Succesfully deleted...");
+            }
+            else{
+                out.println("Record doesn't exist...");
+            }
+                        
+            out.println("<br>");
+            out.println("<br>");
+                        
+            RequestDispatcher rd1 = request.getRequestDispatcher("librarianLoginView");
+            rd1.include(request, response);
             
             out.println("</body>");
             out.println("</html>");

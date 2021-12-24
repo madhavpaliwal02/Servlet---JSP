@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.librarian;
 
 import java.io.IOException;
@@ -11,11 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.sql.*;
+import javax.servlet.RequestDispatcher;
 
-/**
- *
- * @author Nayan
- */
 public class addBooks extends HttpServlet {
 
     /**
@@ -35,21 +29,35 @@ public class addBooks extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addBooks</title>");            
+            out.println("<title>Servlet addBooks</title>");
             out.println("</head>");
             out.println("<body>");
-            
+
             String name = request.getParameter("bname");
             String desc = request.getParameter("bdesc");
             String author = request.getParameter("bauth");
-            String edition = request.getParameter("bedition");
-            
+            int edition = Integer.parseInt(request.getParameter("bedition"));
+
+            // Creating book object and passing it as argument
+            Book book = new Book();
+            book.setName(name);
+            book.setDesc(desc);
+            book.setAuth(author);
+            book.setEdition(edition);
+
             // Database storing
-            
-            out.println("Registered Successfully !!!");
-            
-            
-            
+            int status = SqlQuery.insertBook(book);
+
+            if (status > 0) {
+                out.println("<h1>Registered Successfully !!!</h1>");
+                RequestDispatcher rd = request.getRequestDispatcher("librarianLoginView");
+                rd.include(request, response);
+            } else {
+                out.println("<h3>Sorry ! unable to save...</h3>");
+            }
+
+            out.println("");
+
             out.println("</body>");
             out.println("</html>");
         }

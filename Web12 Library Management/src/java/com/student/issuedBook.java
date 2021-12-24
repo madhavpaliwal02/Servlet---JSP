@@ -1,5 +1,6 @@
 package com.student;
 
+import com.sql.*;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -29,10 +30,23 @@ public class issuedBook extends HttpServlet {
             
             String name = request.getParameter("bname");
             String edition = request.getParameter("bedition");
+            int edi = Integer.parseInt(edition);
+            
+            
             
             // Database me search krke issued book table me student id ke saath add krna hai
             
-            out.println("Added Successfully");
+            int status = SqlQuery.matchBook(name, edi);
+//            out.println(b.getEdition());
+//            out.println(name);
+            
+            out.println(edi);
+            if(status == 0){
+                out.println("Added Successfully");
+            }
+//            else
+            
+            
             
             out.println("</body>");
             out.println("</html>");
