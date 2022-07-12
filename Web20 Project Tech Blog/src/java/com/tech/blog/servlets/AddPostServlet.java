@@ -1,18 +1,16 @@
-package com.servlets;
+package com.tech.blog.servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.tech.blog.dao.PostDao;
+import com.tech.blog.entities.Posts;
+import com.tech.blog.entities.User;
+import com.tech.blog.helper.*;
+import java.io.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.*;
 
-/**
- *
- * @author Nayan
- */
-public class Servlet2 extends HttpServlet {
+@MultipartConfig
+public class AddPostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,41 +26,37 @@ public class Servlet2 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Servlet2</title>");            
-            out.println("</head>");
-            out.println("<body>");
             
-            Cookie[] ck = request.getCookies();
-            boolean f = false;
-            String name = "";
+            int cid = Integer.parseInt(request.getParameter("cid"));
+            String title = request.getParameter("title");
+            String content = request.getParameter("content");
+            String code = request.getParameter("code");
+            Part part = request.getPart("pic");
             
-            if(ck == null){
-                out.println("You are non-Registered user, Register yourself");
-                return;
+            /*out.println("Cid " + cid);
+            out.println("title " + title);
+            out.println("Content " + content);
+            out.println("code " + code);
+            out.println("pic " + pic);*/
+            
+            // getting user id
+            HttpSession s = request.getSession();
+            User user = (User) s.getAttribute("currentUser");
+            
+            // Adding details of posts to its object
+            Posts post = new Posts(cid, title, content, code, part.getSubmittedFileName(), user.getId());
+            
+            // Adding details to database
+            PostDao dao = new PostDao(ConnectionProvider.getCon());
+            
+            if(dao.addPost(post)){
+                String path = request.getRealPath("/") + "blog_pics" + File.separator + part.getSubmittedFileName();
+                Helper.saveFile(part.getInputStream(), path);
+                out.println("posted");
             }
             else{
-                for(Cookie x : ck){
-                    String tname = x.getName();
-                    if(tname.equals("uname")){
-                        f = true;
-                        name = x.getValue();
-                    }
-                }
+                out.println("Unsuccessfull...");                
             }
-            
-            if(f){
-                out.println("<h2>Hello " +name+ " Welcome to my website</h2>");
-                out.println("Thank You");
-            }
-            else{
-                out.println("<h2>You are non-Registered user, Register yourself</h2>");
-            }
-            
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 

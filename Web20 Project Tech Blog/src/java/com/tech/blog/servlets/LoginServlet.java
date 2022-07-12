@@ -1,18 +1,23 @@
-package com.servlets;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package com.tech.blog.servlets;
 
+import com.tech.blog.dao.UserDao;
+import com.tech.blog.entities.Message;
+import com.tech.blog.entities.User;
+import com.tech.blog.helper.ConnectionProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 /**
  *
  * @author Nayan
  */
-public class Servlet2 extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,36 +36,43 @@ public class Servlet2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet2</title>");            
+            out.println("<title>Servlet LoginServlet</title>");
             out.println("</head>");
             out.println("<body>");
+
+            // Login page
             
-            Cookie[] ck = request.getCookies();
-            boolean f = false;
-            String name = "";
-            
-            if(ck == null){
-                out.println("You are non-Registered user, Register yourself");
-                return;
-            }
-            else{
-                for(Cookie x : ck){
-                    String tname = x.getName();
-                    if(tname.equals("uname")){
-                        f = true;
-                        name = x.getValue();
-                    }
+            // Check box
+            String check = request.getParameter("ckBox");
+
+            if (check == null) {
+                out.println("Please check the check-box");
+                response.sendRedirect("login_page.jsp");
+            } else {
+                // Database Connectivity
+                UserDao dao = new UserDao(ConnectionProvider.getCon());
+
+                // Fetching details from form
+                String email = request.getParameter("userEmail");
+                String pass = request.getParameter("userPass");
+
+                // Fetching details from database
+                User user = dao.getUserByEmailAndPassword(email, pass);
+
+                if (user == null) {
+                    Message msg = new Message("Invalid details, Please try again", "error", "alert-danger");
+                    
+                    HttpSession s = request.getSession();
+                    s.setAttribute("msg", msg);
+                    
+                    response.sendRedirect("login_page.jsp");
+                } else {
+                    HttpSession s = request.getSession();
+                    s.setAttribute("currentUser", user);
+                    response.sendRedirect("profile.jsp");
                 }
             }
-            
-            if(f){
-                out.println("<h2>Hello " +name+ " Welcome to my website</h2>");
-                out.println("Thank You");
-            }
-            else{
-                out.println("<h2>You are non-Registered user, Register yourself</h2>");
-            }
-            
+
             out.println("</body>");
             out.println("</html>");
         }

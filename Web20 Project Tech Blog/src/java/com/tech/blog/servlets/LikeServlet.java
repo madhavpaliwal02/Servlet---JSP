@@ -1,18 +1,15 @@
-package com.servlets;
+package com.tech.blog.servlets;
 
+import com.tech.blog.dao.LikeDao;
+import com.tech.blog.helper.ConnectionProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Nayan
- */
-public class Servlet2 extends HttpServlet {
+public class LikeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,36 +28,28 @@ public class Servlet2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet2</title>");            
+            out.println("<title>Servlet LikeServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            
-            Cookie[] ck = request.getCookies();
-            boolean f = false;
-            String name = "";
-            
-            if(ck == null){
-                out.println("You are non-Registered user, Register yourself");
-                return;
-            }
-            else{
-                for(Cookie x : ck){
-                    String tname = x.getName();
-                    if(tname.equals("uname")){
-                        f = true;
-                        name = x.getValue();
-                    }
+
+            String op = request.getParameter("operation");
+            int uid = Integer.parseInt(request.getParameter("uid"));
+            int pid = Integer.parseInt(request.getParameter("pid"));
+
+            out.println(uid);
+            out.println(pid);
+            out.println(op);
+
+            LikeDao d = new LikeDao(ConnectionProvider.getCon());
+
+            if (op.equals("like")) {
+                if (d.insertLike(pid, uid)) {
+                    out.println("true");
+                } else {
+                    out.println("false");
                 }
             }
-            
-            if(f){
-                out.println("<h2>Hello " +name+ " Welcome to my website</h2>");
-                out.println("Thank You");
-            }
-            else{
-                out.println("<h2>You are non-Registered user, Register yourself</h2>");
-            }
-            
+
             out.println("</body>");
             out.println("</html>");
         }
